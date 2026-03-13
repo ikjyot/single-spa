@@ -1,0 +1,27 @@
+/* Base reset */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Our Master App Grid */
+.app-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Specific MFE Slots */
+.navbar-slot {
+    height: 60px;
+    background: #a93e3e;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.main-content-slot {
+    flex-grow: 1;
+    padding: 24px;
+    background: #f4f6f8;
+    overflow-y: auto;
+}

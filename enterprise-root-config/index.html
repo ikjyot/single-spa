@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Enterprise Portal</title>
+    <!-- By including this shim before your import map and your module scripts, you guarantee that when your code later runs import '@comp/root-config';, the browser knows exactly where to fetch that file from, regardless of its native support for import maps. -->
+    <script async src="https://ga.jspm.io/npm:es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+    <script type="importmap" src="/registry.json"></script>
+
+    <link rel="stylesheet" href="/src/layout.css">
+    <!-- This is required for HMR to work in the Root Config and in standalone mode -->
+    <script type="module">
+        // We point this to the Navbar's dev server. 
+        // Future React MFEs (like the Dashboard) will safely piggyback off this same runtime.
+        import RefreshRuntime from 'http://localhost:8083/@react-refresh'
+        RefreshRuntime.injectIntoGlobalHook(window)
+        window.$RefreshReg$ = () => { }
+        window.$RefreshSig$ = () => (type) => type
+        window.__vite_plugin_react_preamble_installed__ = true
+    </script>
+</head>
+
+<body>
+
+    <template id="single-spa-layout">
+        <single-spa-router>
+            <div class="app-layout">
+
+                <nav class="navbar-slot">
+                    <application name="@comp/navbar"></application>
+                </nav>
+
+                <main class="main-content-slot">
+                    <route path="dashboard">
+                        <application name="@comp/dashboard"></application>
+                    </route>
+                    <route path="profile">
+                        <application name="@comp/profile"></application>
+                    </route>
+                    <route path="exact">
+                        <h1>Welcome to the Enterprise Portal. Select Dashboard or Profile from the Navbar.</h1>
+                    </route>
+                    <route default>
+                        <h1>404 - Page Not Found</h1>
+                    </route>
+                </main>
+            </div>
+        </single-spa-router>
+    </template>
+
+    <!-- We used @comp/root-config in the import map. But since we are using Vite, it does not know about importMaps (since it is a browser feature). Since vite analyses the code before sending it to browser, it will fail to find @comp/root-config. So we use the following script to import it. -->
+    <!-- <script type="module">
+        import '@comp/root-config';
+    </script> -->
+
+    <!-- <script type="module" src="./src/root-config.ts"></script> -->
+    <script type="module" src="./src/main.ts"></script>
+</body>
+
+</html>

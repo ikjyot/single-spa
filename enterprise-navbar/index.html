@@ -1,0 +1,23 @@
+<!-- This file is ignored by root config and solely exists for local dev when navbar team is working in isolation -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Navbar (Standalone Dev)</title>
+    <script type="importmap">
+        {
+            "imports": {
+                "@comp/auth-utility": "http://localhost:8081/src/main.ts"
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="module" src="src/standalone.tsx"></script>
+</body>
+
+</html>
