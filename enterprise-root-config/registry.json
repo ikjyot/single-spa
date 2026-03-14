@@ -4,6 +4,7 @@
         "@comp/dashboard": "http://localhost:8082/src/main.tsx",
         "@comp/navbar": "http://localhost:8083/src/main.tsx",
         "@comp/profile": "http://localhost:8084/src/main.tsx",
-        "@comp/design-system": "http://localhost:8085/src/main.ts"
+        "@comp/design-system": "http://localhost:8085/src/main.ts",
+        "@comp/react-core": "http://localhost:8086/src/main.ts"
     }
 }

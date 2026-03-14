@@ -90,3 +90,7 @@ export default defineConfig({
 #### Tailwind v4 Strict Prefixing & `@apply`
 **The Context:** When initializing `shadcn/ui`, the CLI automatically generates a global `@layer base` block inside `index.css` to establish default theme styles (e.g., `body { @apply bg-background text-foreground; }`). 
 **The Enterprise Pattern:** Because Tailwind v4 strictly enforces our `ds:` prefix namespace, the compiler will instantly crash when it reads these unprefixed `@apply` directives. After running `shadcn init`, you must manually edit `index.css` and append the enterprise prefix to every utility class within the base layer (e.g., `body { @apply ds:bg-background ds:text-foreground; }`) to satisfy the compiler and maintain global isolation.
+
+### Security Strategy: MFE Route Guards
+**The Context:** Relying on conditional rendering (`if (!auth) return null`) within an MFE is insufficient for enterprise security. It leaves the MFE mounted, risking unauthorized background network requests.
+**The Enterprise Pattern:** MFEs containing sensitive data must be wrapped in a `ProtectedRoute` Wrapper Component. This component subscribes directly to the headless Auth Utility's RxJS stream. If a user's session is invalid or lacks the Required Role (RBAC), the guard intercepts the render cycle and immediately fires `single-spa`'s `MapsToUrl` to unmount the MFE and forcefully eject the user to a public route.

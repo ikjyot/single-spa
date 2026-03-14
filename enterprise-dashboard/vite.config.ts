@@ -12,14 +12,15 @@ export default defineConfig({
       serverPort: 8082,
       spaEntryPoints: 'src/main.tsx',
     }),
-    // THE ENTERPRISE FIX: Force Dev Server to ignore the Design System import
-    externalize({ externals: ['@comp/design-system'] })],
+    // Force Dev Server to ignore the Design System import
+    externalize({ externals: ['@comp/design-system', '@comp/react-core'] })],
   server: {
     port: 8082,
   },
   build: {
     rollupOptions: {
-      external: ['@comp/design-system']
+      // Externalize dependencies in production
+      external: ['@comp/design-system', '@comp/react-core']
     }
   }
 })
